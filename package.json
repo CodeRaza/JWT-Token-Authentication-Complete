@@ -1,0 +1,24 @@
+{
+  "name": "jwt---token-authentication",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon ./src/server.js"
+  },
+  "author": "coder.aliraza",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-list-endpoints": "^6.0.0",
+    "express-list-routes": "^1.1.3",
+    "jsonwebtoken": "^8.5.1",
+    "sequelize": "^6.21.4",
+    "sqlite3": "^5.0.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
