@@ -7,12 +7,14 @@ const app = express();
 const port = process.env.PORT;
 const db = require("./config/database")
 
+const userRouter = require("./api/routes/user");
 const loginRouter = require("./api/routes/login");
 const registerRouter = require("./api/routes/register");
 
 app.use(express.json());
 
 // Handling all Routes
+app.use("/api/users", userRouter);
 app.use("/api/auth/", loginRouter);
 app.use("/api/account/register", registerRouter);
 
