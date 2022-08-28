@@ -49,10 +49,37 @@ exports.register = async (req, res) => {
 
     await dbRefreshToken.save()
 
+    const email_verify_token = accessTokenGenerator(user.toJSON);
+
+    const message = `${process.env.BASE_URL}/account/email-verify/${username}/${email_verify_token}`;
+    await sendEmail(user.email, "Verify Email", message);
+
     res.json({
         "status": 200,
         "user": user,
+        "Message": "An mail sent to your account please verify to Activate your Account.",
         "access_token": accessToken,
         "refresh_token": refreshToken
     })
+}
+
+
+exports.email_verify = async (req, res) => {
+    const token = req.params.token;
+    const username = req.params.username;
+
+    const user = await UserModel.findOne({where: {username: username}});
+
+    if (user) {
+        jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+            if(err) return res.json({"error_message": "Invalid Token"});
+            const updated = UserModel.update({isActive: true}, {where: {username: username}})   
+            res.json({"message": "User Verified!"})
+        })
+    } else {
+        res.json({
+            "error_message": "Wrong Token or User"
+        })
+    }
+
 }
