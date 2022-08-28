@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const UserModel = require("../models/User");
 const RefreshToken = require("../models/RefreshToken");
 
-const accessTokenGenerator = require("../../utilities/accessTokenGen");
+const accessTokenGenerator = require("../../../utilities/accessTokenGen");
 
 exports.login = async (req, res) => {
     
