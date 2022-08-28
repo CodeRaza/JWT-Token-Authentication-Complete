@@ -7,16 +7,20 @@ const app = express();
 const port = process.env.PORT;
 const db = require("./config/database")
 
-const userRouter = require("./api/routes/user");
-const loginRouter = require("./api/routes/login");
-const registerRouter = require("./api/routes/register");
+const userRouterV1 = require("./api/v1/routes/user");
+const loginRouterV1 = require("./api/v1/routes/login");
+const registerRouterV1 = require("./api/v1/routes/register");
+const passwordResetRouterV1 = require("./api/v1/routes/password_reset");
+const emailVerificationV1 = require("./api/v1/routes/email_verification");
 
 app.use(express.json());
 
-// Handling all Routes
-app.use("/api/users", userRouter);
-app.use("/api/auth/", loginRouter);
-app.use("/api/account/register", registerRouter);
+// Handling all Routes For Version 1 API
+app.use("/api/v1/users", userRouterV1);
+app.use("/api/v1/auth/", loginRouterV1);
+app.use("/api/v1/account/register", registerRouterV1);
+app.use("/api/v1/email-verification", emailVerificationV1);
+app.use("/api/v1/password-reset", passwordResetRouterV1);
 
 // 404 Request Handle
 app.use((req, res) => {
